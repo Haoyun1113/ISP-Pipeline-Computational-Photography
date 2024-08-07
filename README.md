@@ -90,9 +90,11 @@ what I have done ? with multithreading and concurrancy
 4. setClipLimit Method: Allows updating the clip limit of the CLAHE processor.
 5. setTileGridSize Method: Allows updating the tile grid size of the CLAHE processor.
 
-
 ![image](https://github.com/user-attachments/assets/6b9cfad8-dea0-4131-8a32-b356e936b99c)
 
 
 #### 9. Imaging Quality Evaluation: Computed the Modulation Transfer Function (MTF) by implementing an edge detection
 algorithm using the Sobel operator and extracted the Edge Spread Function (ESF).
+
+- Edge Detection with Sobel Operator: as sepearble filter. sobel x and sobel y and took the magnitude of this.
+- Edge Spread Function (ESF):
