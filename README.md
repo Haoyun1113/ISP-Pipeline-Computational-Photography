@@ -68,6 +68,28 @@ Apply the White Patch Algorithm if a bright reference white point is detected.
 2. Non-Local Means(NLM)
 3. Wavelet Based Denosing
 
+---
+
+### Camera Issue -
+- SPIKE Investigation: Autotrack System Behavior upon VAL Crash
+- investigation involves identifying potential issues, understanding the current system response, and proposing a fix or safety net
+- to reproduce the issue, Understand system behavior by forcing a VAL restart during an autotrack session.
+- Start an autotrack session.
+- Force an exception to cause a VAL restart.
+- Observe the system behavior, especially the camera's response and log entries.
+- Ensure this fix covers exceptions caused by:
+1. Throwing an integer value exception
+2. Throwing a VAL-specific exception
+3. Throwing a standard exception (std::exception)
+- Call GoToHomePosition and stop valTracking in the destructor of the AnalyticsChannel implementation.
+- what went wrong ?
+- memory leaks -
+1. Each time a new tracking session starts, memory is allocated for tracking data and not properly released when the session ends or when an exception occurs.
+2. Over time, this can lead to exhaustion of available memory, causing the VAL to crash.
+3. Multiple components or threads might attempt to control the PTZ camera simultaneously, leading to conflicts and crashes. hence, we added exceptions in PTZController class and targetTracker.
+4. Race conditions might occur when multiple threads access shared resources (e.g., camera position data) without proper synchronization, leading to crashes.
+- Solution - Modify the AnalyticsChannel implementation to include a safety net in its destructor.
+The destructor should call GoToHomePosition and stop valTracking to ensure the camera returns to the home position and tracking is properly terminated.
 
 #### 8. Camera Imaging Algorithm Development: Applied histogram equalization and CLAHE (Contrast Limited Adaptive
 Histogram Equalization) to enhance image contrast.
@@ -107,3 +129,16 @@ The MTF values are normalized by dividing by the maximum value.
 
 findMTF50 finds the spatial frequency at which the MTF value drops to 50% of its maximum. This is done using linear interpolation between the points around 0.5.
 
+#### 10. Delta E measures the perceived color difference between two colors. It is commonly used to evaluate color accuracy.
+Steps to Implement Delta E Calculation
+1. Convert RGB to LAB Color Space:
+- Use OpenCV functions to convert images from RGB to LAB color space.
+2. Compute Delta E:
+- Calculate the Delta E value for each corresponding pixel in the LAB images.
+computeDeltaE calculates the Delta E value between corresponding pixels of two LAB images. The Delta E formula used here is the Euclidean distance in the LAB color space:
+![image](https://github.com/user-attachments/assets/896788c5-f452-405d-b93b-35149b9d73d4)
+- The function calculates the Delta E for each pixel and computes the mean Delta E value for the entire image, providing an overall measure of color fidelity.
+- Color fidelity refers to the accuracy with which a camera or display system reproduces the colors of the original scene
+- Perceptual Uniformity: LAB is more aligned with human vision. The Euclidean distance between two colors in LAB space (Delta E) is a good approximation of perceived color difference.
+-  LAB separates the lightness (L) component from the color information (a and b components),
+-  Capture a Reference Image Using a Color Calibration Chart
