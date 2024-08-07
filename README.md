@@ -14,7 +14,9 @@ An Image Signal Processor (ISP) pipeline is a critical component in modern digit
 
 - Removes any bias or offset introduced by the sensor.
 - Sets the correct black level for the image.
-
+- all cases, imag have been used as provided with little exploration of pre-prcessing steps, all images captured are processed for viewing by humans with srgb format. question is - pipline used for human perception also best for use by dl networks ?
+- LOG rgb align more with how human visual system process ino.
+- gradient ananlysis, change in colr - srgb, vhange in mag, consitent in both intensity and color,
 #### 3. Demosaicing
 
 - Converts the raw Bayer pattern data from the sensor into a full-color image.
