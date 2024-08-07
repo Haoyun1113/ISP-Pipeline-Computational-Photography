@@ -170,3 +170,30 @@ computeDeltaE calculates the Delta E value between corresponding pixels of two L
 
 
 #### 12 High Dynamic Range - 
+- This includes aligning images using the Median Threshold Bitmap (MTB) algorithm, calculating the Camera Response Function (CRF),
+- merging exposures into an HDR image, and applying tonemapping to create LDR (Low Dynamic Range) images.
+- Take several photos of the same scene with different exposure settings (e.g., underexposed - details in the bright areas, correctly exposed, and overexposed-  details in the dark areas).
+- Align the images using an algorithm like the Median Threshold Bitmap (MTB) to compensate for any camera movement.
+-  The CRF helps in estimating the true radiance values from the pixel values.
+-  Select a set of sample pixels from the images. These pixels should cover the full range of intensity values.
+-  Optimized with equation that relates the pixel values to the scene radiance using the known exposure times and the CRF.
+-  Convert the HDR image to an LDR image using tonemapping algorithms. 
+- Common algorithms include:
+
+1. Drago: Suitable for display devices, preserving details and contrast.
+2. Reinhard: Mimics the human vision system, providing natural-looking results.
+3. Mantiuk: Focuses on contrast enhancement and preserving details.
+
+#### How HDR Works
+- HDR works by combining multiple images taken at different exposure levels into a single image that contains a wider range of luminance. This process involves several steps:
+
+1. Capture Multiple Exposures:
+- Take several photos of the same scene with different exposure settings (e.g., underexposed - details in the bright areas, correctly exposed, and overexposed-  details in the dark areas).
+
+2. Align the Images:
+- Align the images to compensate for any camera movement between shots. This step ensures that corresponding pixels in different exposures refer to the same point in the scene.
+Merge Exposures:
+
+3. Combine the aligned images into a single HDR image. This step involves calculating the true radiance values for each pixel by using the information from all the exposures.
+4. Tonemapping:
+- Convert the HDR image to a Low Dynamic Range (LDR) image that can be displayed on standard monitors or printed. Tonemapping compresses the dynamic range while preserving details and contrast.
