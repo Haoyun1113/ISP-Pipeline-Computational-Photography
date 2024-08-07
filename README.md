@@ -97,4 +97,13 @@ what I have done ? with multithreading and concurrancy
 algorithm using the Sobel operator and extracted the Edge Spread Function (ESF).
 
 - Edge Detection with Sobel Operator: as sepearble filter. sobel x and sobel y and took the magnitude of this.
-- Edge Spread Function (ESF):
+- Edge Spread Function (ESF): computeEdgeSpreadFunction computes the ESF by summing the gradient magnitudes along rows (assuming vertical edges for simplicity).
+- The ESF is normalized by dividing by its maximum value.
+- Line Spread Function (LSF): -calculates the LSF by taking the first derivative of the ESF.
+- by subtracting the value from 1d flatten vector of esf.
+- computeMTF computes the MTF by taking the Discrete Fourier Transform (DFT) of the LSF.
+The MTF values are normalized by dividing by the maximum value.
+- MTF50 Calculation:
+
+findMTF50 finds the spatial frequency at which the MTF value drops to 50% of its maximum. This is done using linear interpolation between the points around 0.5.
+
