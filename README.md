@@ -144,14 +144,11 @@ computeDeltaE calculates the Delta E value between corresponding pixels of two L
 -  Capture a Reference Image Using a Color Calibration Chart
 
 
-.\n
-.\n
-.\n
-.\n
-.
-.
-.
-.
-.
-.
-.
+-
+-
+
+-
+-
+-
+-
+
