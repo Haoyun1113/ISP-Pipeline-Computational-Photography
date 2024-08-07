@@ -143,12 +143,30 @@ computeDeltaE calculates the Delta E value between corresponding pixels of two L
 -  LAB separates the lightness (L) component from the color information (a and b components),
 -  Capture a Reference Image Using a Color Calibration Chart
 
+#### 11. Denosing + Evalution Metrics
+- MSE and SSIM(Structural Similarity Index) between the original and denoised frames =[-1,1]
+- SSIM assesses the similarity between two images based on three key components: luminance, contrast, and structure.
+- mSE considers aboslute errors, SSIM considers changes in structural information, which are more perceptually relevant. 
+- Luminance (l): Measures the difference in brightness between the two images.
+- Contrast (c): Measures the difference in contrast between the two images.
+- Structure (s): Measures the similarity of patterns or structures in the images.
 
--
--
+- Steps :
+- Calculate Squared Images and Product Image - to compute the local variances and covariance.
+- Gaussian blur is applied to smooth the images, effectively calculating local means.
+-  Variance and covariance capture the contrast and structural differences between the images.
+- Apply Gaussian blur to the squared images and product image, then subtract the squared means to get the variances and covariance.
+- Compute the luminance, contrast, and structure components using the calculated means, variances, and covariance.
+- The SSIM map provides a pixel-wise similarity measure.
 
--
--
--
--
+1. Bilateral Filring - Bilateral filtering smooths images while preserving edges by considering both spatial distance and intensity differences.
+2. Gaussian Filtering - linear filter - implementes as seperable,
+3. Non local means - by averaging pixels with similar neighborhoods. It searches for similar patches within a search window and averages them based on similarity.
+- Unlike traditional filters that use only local information, NLM uses a non-local approach by considering the similarity between patches (neighborhoods) of pixels throughout the image.
+- Extracting Patches - A patch is a small sub-region of the image centered at a specific pixel.
+- Computing the Squared Euclidean Distance: between two patches.
+- Computing Weights: The weight w_ij_kl is computed using a Gaussian kernel based on the distance between the patches.
+- The denoised pixel value I'(i, j) is obtained by normalizing the weighted sum of pixel values in the search window.
 
+
+#### 12 High Dynamic Range - 
