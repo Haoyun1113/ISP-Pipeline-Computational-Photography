@@ -69,9 +69,30 @@ Apply the White Patch Algorithm if a bright reference white point is detected.
 3. Wavelet Based Denosing
 
 
+#### 8. Camera Imaging Algorithm Development: Applied histogram equalization and CLAHE (Contrast Limited Adaptive
+Histogram Equalization) to enhance image contrast.
+
+- Histogram Equalization is a technique used to improve the contrast in an image by effectively spreading out the most frequent intensity values.
+- This is done by transforming the intensity values so that the histogram of the output image is approximately uniform.
+- Steps:
+- Divide the image into small, non-overlapping tiles.
+- Apply histogram equalization to each tile.
+- Clip the histogram at a predefined threshold to limit contrast enhancement.
+
+- input was ycbcr color space, applies clahe on Y channel,
+- The YCrCb color space separates the image into a luminance component (Y) and chrominance components (Cr and Cb).
+- By converting the image to the YCrCb color space and applying CLAHE only to the Y (luminance) channel, we enhance the contrast without affecting the color information (Cr and Cb channels).
+- The Y channel represents brightness, while Cr and Cb represent color information. This separation allows for contrast enhancement on the brightness component without affecting color information.
+what I have done ? with multithreading and concurrancy
+1. wrote - CLAHEProcessor Class:
+2. Constructor: Initializes the CLAHE processor with a specified clip limit and tile grid size. Creates the CLAHE object using cv::createCLAHE.
+3. apply Method: Applies CLAHE to an input image. It checks if the input image is grayscale or color. If grayscale, it applies CLAHE directly. If color, it converts the image to the YCrCb color space, applies CLAHE to the Y channel, By converting the image to the YCrCb color space and applying CLAHE only to the Y (luminance) channel, we enhance the contrast without affecting the color information (Cr and Cb channels)..
+4. setClipLimit Method: Allows updating the clip limit of the CLAHE processor.
+5. setTileGridSize Method: Allows updating the tile grid size of the CLAHE processor.
 
 
+![image](https://github.com/user-attachments/assets/6b9cfad8-dea0-4131-8a32-b356e936b99c)
 
 
-
-
+#### 9. Imaging Quality Evaluation: Computed the Modulation Transfer Function (MTF) by implementing an edge detection
+algorithm using the Sobel operator and extracted the Edge Spread Function (ESF).
