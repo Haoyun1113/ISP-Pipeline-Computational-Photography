@@ -199,3 +199,12 @@ Merge Exposures:
 3. Combine the aligned images into a single HDR image. This step involves calculating the true radiance values for each pixel by using the information from all the exposures.
 4. Tonemapping:
 - Convert the HDR image to a Low Dynamic Range (LDR) image that can be displayed on standard monitors or printed. Tonemapping compresses the dynamic range while preserving details and contrast.
+-
+-
+-
+-
+-
+-
+-
+-
+-
