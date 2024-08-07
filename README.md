@@ -142,3 +142,16 @@ computeDeltaE calculates the Delta E value between corresponding pixels of two L
 - Perceptual Uniformity: LAB is more aligned with human vision. The Euclidean distance between two colors in LAB space (Delta E) is a good approximation of perceived color difference.
 -  LAB separates the lightness (L) component from the color information (a and b components),
 -  Capture a Reference Image Using a Color Calibration Chart
+
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
